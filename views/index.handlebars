@@ -27,16 +27,16 @@
             <div class="six columns">
               <h5>Bill type</h5>
               
-              <form action="/settings " method="POST">
+              <form action="/action" method="POST">
               <label class="">
-                <input type="radio" name="billItemTypeWithSettings" class="billItemTypeWithSettings">
+                <input type="radio" name="actionType" class="billItemTypeWithSettings" value="call">
                 <span class="label-body">Call</span>
               </label>
               <label class="">
-                <input type="radio" name="billItemTypeWithSettings" class="billItemTypeWithSettings">
+                <input type="radio" name="actionType" class="billItemTypeWithSettings" value="sms">
                 <span class="label-body" >SMS</span>
               </label>
-              <button class="button-primary" type="button" name="button">Add</button>
+              <button class="button-primary" type="submit" >Add</button>
 
               <h5>Totals</h5>
                   <table>
@@ -44,23 +44,26 @@
                       <td>
                         <a href="/actions/calls">Call total</a>
                       </td>
-                      <td>R<span class="callTotalSettings">34.00</span> </td>
+                      <td>R<span class="callTotalSettings" >{{totals.callTotal}}</span> </td>
                     </tr>
                     <tr>
                       <td>
                         <a href="/actions/sms">SMS total</a>
                       </td>
-                      <td>R<span class="smsTotalSettings">7.35</span> </td>
+                      <td>R<span class="smsTotalSettings" >{{totals.smsTotal}}</span> </td>
                     </tr>
                     <tr>
                       <td>
                         <a href="/actions">Total</a>
                       </td>
-                      <td> R<span class="totalSettings">41.35</span> </td>
+                      <td> R<span class="totalSettings">{{totals.grandTotal}}</span> </td>
                     </tr>
                   </table>
 
             </div>
+             </form>
+              
+              <form action="/settings " method="POST">
             <div class="six columns">
               <h5>Settings</h5>
               <label for="exampleEmailInput">Call cost</label>
