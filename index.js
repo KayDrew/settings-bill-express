@@ -44,7 +44,10 @@ settingsBill.setSettings({
 }
 
 );
-    console.log(settingsBill.getSettings());
+
+
+console.log(settingsBill.hasReachedCriticalLevel());
+console.log(settingsBill.hasReachedWarningLevel());
     res.redirect('/');
 
 });
@@ -60,17 +63,22 @@ app.post('/action', function (req, res) {
 
 app.get('/actions', function (req, res) {
 
+res.render('actions',{actions:settingsBill.actions()
+
+});
     
 
 });
 
-app.get('/actions/:type', function (req, res) {
+app.get('/actions/:actionType', function (req, res) {
 
-    
+    const actionType=req.params.actionType;
+    console.log(actionType);
+res.render('actions',{actions:settingsBill.actionsFor(actionType)
 
 });
 
-
+});
 
 
 let PORT = process.env.PORT || 3007;
