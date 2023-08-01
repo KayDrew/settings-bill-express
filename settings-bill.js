@@ -33,12 +33,14 @@ export default function SettingsBill() {
         else if (action === 'call'){
             cost = callCost;
         }
+if(!hasReachedCriticalLevel()){
 
         actionList.push({
             type: action,
             cost,
             timestamp: new Date()
         });
+}
     }
 
     function actions(){
