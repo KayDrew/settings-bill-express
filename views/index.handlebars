@@ -44,19 +44,19 @@
                       <td>
                         <a href="/actions/call">Call total</a>
                       </td>
-                      <td>R<span class="callTotalSettings" >{{totals.callTotal}}</span> </td>
+                      <td>R<span class="callTotalSettings" >{{roundedCall}}</span> </td>
                     </tr>
                     <tr>
                       <td>
                         <a href="/actions/sms">SMS total</a>
                       </td>
-                      <td>R<span class="smsTotalSettings" >{{totals.smsTotal}}</span> </td>
+                      <td>R<span class="smsTotalSettings" >{{roundedSms}}</span> </td>
                     </tr>
                     <tr>
                       <td>
                         <a href="/actions">Total</a>
                       </td>
-                      <td> R<span class="totalSettings">{{totals.grandTotal}}</span> </td>
+                      <td> R<span class="totalSettings">{{roundedTotal}}</span> </td>
                     </tr>
                   </table>
 
@@ -85,4 +85,19 @@
     
 
   </body>
+  <script>
+
+    let warning={{warningLevel}};
+    let critical={{criticalLevel}};
+
+    if(warning){
+      document.querySelector(".totalSettings").style.color="orange";
+    }
+
+    else if(critical){
+
+      document.querySelector(".totalSettings").style.color="red";
+
+    }
+  </script>]
 </html>

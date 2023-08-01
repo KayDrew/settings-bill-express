@@ -25,10 +25,13 @@ app.get('/', function (req, res) {
 
     res.render('index',{
         settings: settingsBill.getSettings(),
-        totals: settingsBill.totals()
+        totals: settingsBill.totals(),
+        warningLevel: settingsBill.hasReachedWarningLevel(),
+        criticalLevel: settingsBill.hasReachedCriticalLevel(),
+        roundedSms:settingsBill.totals().smsTotal.toFixed(2),
+        roundedCall:settingsBill.totals().callTotal.toFixed(2),
+        roundedTotal: settingsBill.totals().grandTotal.toFixed(2)
         
-
-    
     
     });
 
