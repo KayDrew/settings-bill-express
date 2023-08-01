@@ -2,6 +2,7 @@ import express  from 'express';
 import bodyParser from 'body-parser';
 import { engine } from 'express-handlebars';
 import SettingsBill from './settings-bill.js';
+import moment from 'moment';
 const app = express();
 
 
@@ -73,7 +74,7 @@ res.render('actions',{actions:settingsBill.actions()
 app.get('/actions/:actionType', function (req, res) {
 
     const actionType=req.params.actionType;
-    console.log(actionType);
+    
 res.render('actions',{actions:settingsBill.actionsFor(actionType)
 
 });

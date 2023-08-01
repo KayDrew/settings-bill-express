@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export default function SettingsBill() {
 
     let smsCost;
@@ -27,6 +29,7 @@ export default function SettingsBill() {
     function recordAction(action) {
 
         let cost = 0;
+        let time= new Date();
         if (action === 'sms'){
             cost = smsCost;
         }
@@ -38,7 +41,7 @@ if(!hasReachedCriticalLevel()){
         actionList.push({
             type: action,
             cost,
-            timestamp: new Date()
+            timestamp: moment(time).fromNow()
         });
 }
     }
