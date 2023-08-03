@@ -20,6 +20,7 @@ app.use(bodyParser.json())
 
 
 const settingsBill=SettingsBill();
+const settingsBill2=SettingsBill();
 
 app.get('/', function (req, res) {
 
@@ -51,18 +52,26 @@ settingsBill.setSettings({
 
 );
 
+    
+settingsBill2.setSettings({
+    
+    callCost:req.body.callCost,
+    smsCost: req.body.smsCost,
+    warningLevel: req.body.warningLevel,
+    criticalLevel: req.body.criticalLevel
+}
 
+);
+    
     res.redirect('/');
 
 });
 
 app.post('/action', function (req, res) {
 
-   
 
-   // console.log(momentAgo)
     settingsBill.recordAction(req.body.actionType);
-    
+    settingsBill2.recordAction(req.body.actionType); 
   
     res.redirect('/');
 
@@ -70,23 +79,35 @@ app.post('/action', function (req, res) {
 
 app.get('/actions', function (req, res) {
 
-    var actionsList= settingsBill.actions();
+        var actionsList= settingsBill.actions();
+    
+    
+    const holder=settingsBill2.actions();
+    
+var staticTime= [];
+
+for(let i=0;i<holder.length;++i){
+	
+	
+staticTime.push(holder[i].time);
+
+}
 
 for(let i=0;i<actionsList.length;++i){
 
-    var result= actionsList[i].time;
+  //  var result= actionsList[i].time;
     
-    actionsList[i].time=moment(result).fromNow();
+    actionsList[i].time=moment(staticTime[i]).fromNow();
 
 
 }
     
 
+    
+
 res.render('actions',{actions:actionsList
 
-   
-
-});
+   });
     
 
 });
