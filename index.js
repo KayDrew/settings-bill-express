@@ -30,10 +30,12 @@ app.get('/', function (req, res) {
         criticalLevel: settingsBill.hasReachedCriticalLevel(),
         roundedSms:settingsBill.totals().smsTotal.toFixed(2),
         roundedCall:settingsBill.totals().callTotal.toFixed(2),
-        roundedTotal: settingsBill.totals().grandTotal.toFixed(2)
-        
+        roundedTotal: settingsBill.totals().grandTotal.toFixed(2),
+         
+    
     
     });
+
 
 });
 
@@ -50,15 +52,15 @@ settingsBill.setSettings({
 );
 
 
-console.log(settingsBill.hasReachedCriticalLevel());
-console.log(settingsBill.hasReachedWarningLevel());
     res.redirect('/');
 
 });
 
 app.post('/action', function (req, res) {
 
-    settingsBill.recordAction(req.body.actionType);
+    var momentAgo=moment().fromNow();
+    console.log(momentAgo)
+    settingsBill.recordAction(req.body.actionType,momentAgo);
     
   
     res.redirect('/');
@@ -77,6 +79,7 @@ res.render('actions',{actions:settingsBill.actions()
 app.get('/actions/:actionType', function (req, res) {
 
     const actionType=req.params.actionType;
+   
     
 res.render('actions',{actions:settingsBill.actionsFor(actionType)
 
