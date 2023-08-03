@@ -114,20 +114,26 @@ res.render('actions',{actions:actionsList
 
 app.get('/actions/:actionType', function (req, res) {
 
-    const actionType=req.params.actionType;
+ const actionType=req.params.actionType;
    
     var actionsTypes= settingsBill.actionsFor(actionType);
+       
+            const holder=settingsBill2.actionsFor(actionType);    
+    var staticTime= [];
 
-    for(let i=0;i<actionsTypes.length;++i){
+for(let i=0;i<holder.length;++i){
+	
+	
+staticTime.push(holder[i].time);
 
-        var result= actionsTypes[i].time;
-        
-        actionsTypes[i].time=moment(result).fromNow();
-    
-    
-    }
+}
 
-    
+for(let i=0;i<actionsTypes.length;++i){
+  
+    actionsTypes[i].time=moment(staticTime[i]).fromNow();
+
+}
+     
     
 res.render('actions',{actions:actionsTypes
 
