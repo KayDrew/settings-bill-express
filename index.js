@@ -58,9 +58,10 @@ settingsBill.setSettings({
 
 app.post('/action', function (req, res) {
 
-    var momentAgo=moment().fromNow();
-    console.log(momentAgo)
-    settingsBill.recordAction(req.body.actionType,momentAgo);
+   
+
+   // console.log(momentAgo)
+    settingsBill.recordAction(req.body.actionType);
     
   
     res.redirect('/');
@@ -69,7 +70,21 @@ app.post('/action', function (req, res) {
 
 app.get('/actions', function (req, res) {
 
-res.render('actions',{actions:settingsBill.actions()
+    var actionsList= settingsBill.actions();
+
+for(let i=0;i<actionsList.length;++i){
+
+    var result= actionsList[i].time;
+    
+    actionsList[i].time=moment(result).fromNow();
+
+
+}
+    
+
+res.render('actions',{actions:actionsList
+
+   
 
 });
     
@@ -80,10 +95,24 @@ app.get('/actions/:actionType', function (req, res) {
 
     const actionType=req.params.actionType;
    
+    var actionsTypes= settingsBill.actionsFor(actionType);
+
+    for(let i=0;i<actionsTypes.length;++i){
+
+        var result= actionsTypes[i].time;
+        
+        actionsTypes[i].time=moment(result).fromNow();
     
-res.render('actions',{actions:settingsBill.actionsFor(actionType)
+    
+    }
+
+    
+    
+res.render('actions',{actions:actionsTypes
 
 });
+
+
 
 });
 

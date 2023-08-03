@@ -26,10 +26,10 @@ export default function SettingsBill() {
         }
     }
 
-    function recordAction(action,time) {
+    function recordAction(action) {
 
         let cost = 0;
-      
+        
         if (action === 'sms'){
             cost = smsCost;
         }
@@ -43,7 +43,7 @@ if(!hasReachedCriticalLevel()){
         actionList.push({
             type: action,
             cost,
-            time
+            time: new Date()
         });
 
     }
